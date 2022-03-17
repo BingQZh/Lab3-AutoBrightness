@@ -24,6 +24,7 @@ entity spi_master is
         -- Internal interface when obtaining data back from slave chip
         ready : in std_logic;
         valid : out std_logic;
+        tester : out std_logic; -- delete later
         data : out std_logic_vector(total_bits-leading_z-trailing_z-2 downto 0));
 end spi_master;
 
@@ -41,19 +42,19 @@ architecture rtl of spi_master is
     signal sclk_counter : integer range 0 to total_bits := 0;
     signal prev_sclk, temp_sclk : std_logic;
 
-    function Rising_Edge_Check(FF2 : std_logic;
-            FF3 : std_logic) return std_logic is
-        variable result : std_logic;
-    begin
-        if FF3 = '0' and FF2 = '1' then -- this is a rising edge
-            result := '1';
-        else
-            result := '0';
-        end if;
-        return result;
-    end function;
+    -- function Rising_Edge_Check(FF2 : std_logic;
+    --         FF3 : std_logic) return std_logic is
+    --     variable result : std_logic;
+    -- begin
+    --     if FF3 = '0' and FF2 = '1' then -- this is a rising edge
+    --         result := '1';
+    --     else
+    --         result := '0';
+    --     end if;
+    --     return result;
+    -- end function;
 
-    function Falling_Edge_Check(FF2 : std_logic;
+    function Rising_Edge_Check(FF2 : std_logic;
             FF3 : std_logic) return std_logic is
         variable result : std_logic;
     begin
