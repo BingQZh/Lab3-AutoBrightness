@@ -24,7 +24,6 @@ entity spi_master is
         -- Internal interface when obtaining data back from slave chip
         ready : in std_logic;
         valid : out std_logic;
-        tester : out std_logic; -- delete later
         data : out std_logic_vector(total_bits-leading_z-trailing_z-2 downto 0));
 end spi_master;
 
@@ -37,7 +36,7 @@ architecture rtl of spi_master is
     signal Master_State : STATES := IDLE;
 
     signal temp_data : std_logic_vector(total_bits-leading_z-trailing_z-2 downto 0);
-    signal i : integer range 0 to total_bits-leading_z-trailing_z-2 := total_bits-leading_z-trailing_z-2;
+    signal i : integer range 0 to total_bits-leading_z-trailing_z-1 := total_bits-leading_z-trailing_z-1;
 
     signal sclk_counter : integer range 0 to total_bits := 0;
     signal prev_sclk, temp_sclk : std_logic;
@@ -148,9 +147,9 @@ begin
                             if sclk_counter < leading_z then
                                 sclk_counter <= sclk_counter + 1;
                             else    
-                                temp_data(i) <= valid_miso;
+                                temp_data(i-1) <= valid_miso;
                                 sclk_counter <= sclk_counter + 1;
-                                if sclk_counter > total_bits-trailing_z-1 then
+                                if sclk_counter < total_bits-trailing_z-1 then
                                     i <= i - 1;
                                 else
                                     if sclk_counter < total_bits then

@@ -31,7 +31,6 @@ architecture sim of spi_master_tb is
     signal miso : std_logic; -- data is written on falling edge of sclk and read on rising edge of sclk
     signal ready : std_logic := '0';
     signal data : std_logic_vector(7 downto 0);
-    signal tester : std_logic; -- delete
     signal input_data : std_logic_vector(15 downto 0) := "0000101101110000";
 
 begin
@@ -47,7 +46,6 @@ begin
         sclk => sclk,
         miso => miso,
         ready => ready,
-        tester => tester, -- delete
         data => data
     );
 
