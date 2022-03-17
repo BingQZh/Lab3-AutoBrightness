@@ -4,11 +4,11 @@ use ieee.numeric_std.all;
 
 entity spi_master is
     generic (
-        clk_hz : integer := 100MHz?; --FPGA clock
+        clk_hz : integer := 100e6; --FPGA clock
         total_bits : integer := 16; --total bits tx by sensor chip
         leading_z : integer := 3;
         trailing_z : integer := 4;
-        sclk_hz : integer := 4MHz?); --sensor’s frequency 
+        sclk_hz : integer := 4e6); --sensor’s frequency 
     port (
         --fpga system
         clk : in std_logic;
@@ -29,6 +29,9 @@ end spi_master;
 
 architecture rtl of spi_master is
 
+    constant sclk_period : time := 1 sec / sclk_hz;
+
+    signal miso_ff1, miso_ff2, miso_ff3, valid_miso : std_logic := '0';
     type STATES is (IDLE, TRANSMISSION); -- FSM states
     signal Master_State : STATES := IDLE;
 
@@ -36,6 +39,7 @@ architecture rtl of spi_master is
     signal i : integer range 0 to total_bits-leading_z-trailing_z-2 := total_bits-leading_z-trailing_z-2;
 
     signal sclk_counter : integer range 0 to total_bits := 0;
+    signal prev_sclk, temp_sclk : std_logic;
 
     function Rising_Edge_Check(FF2 : std_logic;
             FF3 : std_logic) return std_logic is
@@ -117,15 +121,17 @@ begin
 
                     when IDLE =>
                         sclk <= '1';
-                        prev_sclk <= sclk;
+                        temp_sclk <= '1';
+                        prev_sclk <= temp_sclk;
 
                         if ready = '1' then
                             Master_State <= TRANSMISSION;
                         end if;
 
                     when TRANSMISSION =>
-                        prev_sclk <= sclk;
-                        sclk <= not sclk after sclk_hz / 2;
+                        prev_sclk <= temp_sclk;
+                        sclk <= not temp_sclk after sclk_period / 2;
+                        temp_sclk <= not temp_sclk after sclk_period / 2;
                         cs <= '0';
 
                         -- the following if statement checks if data is ready to output!
@@ -137,7 +143,7 @@ begin
                             valid <= '0';
                         end if;
 
-                        if Rising_Edge_Check(prev_sclk, sclk) = '1' then -- rising edge of B clk
+                        if Rising_Edge_Check(prev_sclk, temp_sclk) = '1' then -- rising edge of B clk
                             if sclk_counter < leading_z then
                                 sclk_counter <= sclk_counter + 1;
                             else    
