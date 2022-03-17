@@ -30,6 +30,11 @@ architecture rtl of spi_master is
     type STATES is (IDLE, TRANSMISSION); -- FSM states
     signal Master_State : STATES := IDLE;
 
+    signal temp_data : std_logic_vector(7 downto 0);
+    signal i : integer range 0 to 7 := 0;
+
+    signal sclk_counter : integer range 0 to 16 := 0;
+
     function Rising_Edge_Check(FF2 : std_logic;
             FF3 : std_logic) return std_logic is
         variable result : std_logic;
@@ -110,13 +115,34 @@ begin
 
                     when IDLE =>
                         sclk <= '1';
+                        prev_sclk <= sclk;
                         if ready = '1' then
                             Master_State <= TRANSMISSION;
                         end if;
 
                     when TRANSMISSION =>
+                        prev_sclk <= sclk;
                         sclk <= not sclk after sclk_hz / 2;
                         cs <= '0';
+                        if Rising_Edge_Check(prev_sclk, sclk) = '1' then -- rising edge of B clk
+                            if sckl_counter < 3 then
+                                sckl_counter <= sckl_counter + 1;
+                            else    
+                                temp_data(i) <= miso;
+                                sckl_counter <= sckl_counter + 1;
+                                if i < 7 then
+                                    i <= i + 1;
+                                else
+                                    if sckl_counter < 16 then
+                                        sckl_counter <= sckl_counter + 1;
+                                    else
+                                        i <= 0;
+                                        sclk_counter <= 0;
+                                        Master_State <= IDLE;
+                                    end if;
+                                end if;
+                            end if;
+                        end if;
 
                 end case;
             end if;
