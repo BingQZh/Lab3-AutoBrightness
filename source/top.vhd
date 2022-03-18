@@ -36,9 +36,8 @@ architecture rtl of top is
   --pwm signals
   signal pwm_count : integer range 0 to (2**pwm_res)-1;
   signal pwm_out : std_logic := '0';
-  --signal fpga_clk : integer := 100e6;
-  --signal pwm_clk : integer := 4e6;
 
+  --debouned reset
   signal debounced_rst : std_logic := '0';
 
   --------------    READY FSM PROCESS SIGNALS   -------------------------
@@ -73,8 +72,6 @@ begin
 
   PRESCALER : entity work.prescaler(rtl)
   generic map(
-   -- clk_hz => fpga_clk,
-    --sclk_hz => pwm_clk,
     fpga_clk => clk_hz,
     pwm_clk => sclk_hz,
     pwm_res => pwm_res
