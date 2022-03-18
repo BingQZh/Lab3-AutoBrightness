@@ -52,7 +52,7 @@ begin
   
   --port map DUT/ instantiate components here -----------------------
   
-  DUT : entity work.spi_master(rtl)
+  SPI : entity work.spi_master(rtl)
   generic map(
     clk_hz => clk_hz,
     total_bits => total_bits,
@@ -71,7 +71,7 @@ begin
       data => data
   );
 
-  DUT2 : entity work.prescaler(rtl)
+  PRESCALER : entity work.prescaler(rtl)
   generic map(
    -- clk_hz => fpga_clk,
     --sclk_hz => pwm_clk,
@@ -85,7 +85,7 @@ begin
     clock_out => clock_out
   );
 
-  DUT3 : entity work.pwm(rtl)
+  PWM : entity work.pwm(rtl)
   generic map(
     pwm_res => pwm_res
   )
@@ -96,7 +96,7 @@ begin
     pwm_out => pwm_out
   );
 
-  DUT4 : entity work.reset_sync(rtl)
+  RESET_SYNC : entity work.reset_sync(rtl)
   port map(
     clk => clk,
     rst_in => rst,
