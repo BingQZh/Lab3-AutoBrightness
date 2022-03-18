@@ -33,6 +33,8 @@ architecture rtl of top is
 
   --pwm signals
   signal pwm_res : integer := 8;
+  signal pwm_count : integer range 0 to (2**pwm_res)-1;
+  signal pwm_out : std_logic := '0';
   --signal fpga_clk : integer := 100e6;
   --signal pwm_clk : integer := 4e6;
 
@@ -82,6 +84,18 @@ begin
     clock_out => clock_out
   );
 
+  DUT3 : entity work.pwm(rtl)
+  generic map(
+    pwm_res => pwm_res
+  )
+  port map(
+    clock => clk,
+    duty_cycle => data,
+    pwm_count => pwm_count,
+    pwm_out => pwm_out
+  );
+
+
    READY_FSM_PROC : process(clk)
     begin
       if rising_edge(clk) then
@@ -120,5 +134,7 @@ begin
         end if;
       end if;
     end process;
+
+    led_out <= (others => pwm_out);
 
 end architecture;
