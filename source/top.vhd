@@ -36,6 +36,8 @@ architecture rtl of top is
   --signal fpga_clk : integer := 100e6;
   --signal pwm_clk : integer := 4e6;
 
+  signal debounced_rst : std_logic := '0';
+
   --------------    READY FSM PROCESS SIGNALS   -------------------------
   -- This counter controls how often samples are fetched and sent
   signal clk_counter : unsigned(clk_counter_bits - 1 downto 0);
@@ -47,8 +49,6 @@ begin
   
   --port map DUT/ instantiate components here -----------------------
   
-  
-  
   DUT : entity work.spi_master(rtl)
   generic map(
     clk_hz => clk_hz,
@@ -59,7 +59,7 @@ begin
   )
   port map (
       clk => clk,
-      rst => rst,
+      rst => debounced_rst,
       valid => valid,
       cs => cs,
       sclk => sclk,
@@ -73,13 +73,20 @@ begin
    -- clk_hz => fpga_clk,
     --sclk_hz => pwm_clk,
     fpga_clk => clk_hz,
-    pwm_clk => sclk_hz,
+    clk => sclk_hz,
     pwm_res => pwm_res
   )
   port map(
     clk => clk,
-    rst => rst,
+    rst => debounced_rst,
     clock_out => clock_out
+  );
+
+  DUT4 : entity work.reset_sync(rtl)
+  port map(
+    clk => clk,
+    rst_in => rst,
+    rst_out => debounced_rst
   );
 
    READY_FSM_PROC : process(clk)
