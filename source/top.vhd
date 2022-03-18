@@ -7,7 +7,7 @@ entity top is
     pwm_res : integer := 8;
     clk_hz : integer := 100e6;
     sclk_hz : integer := 4e6;
-    clk_counter_bits : integer := 24; --for ready_fsm to periodically generate ready signal for chip
+    clk_counter_bits : integer := 6; --24; --for ready_fsm to periodically generate ready signal for chip
     total_bits : integer := 16; --total bits tx by sensor chip
     leading_z : integer := 3;
     trailing_z : integer := 4
