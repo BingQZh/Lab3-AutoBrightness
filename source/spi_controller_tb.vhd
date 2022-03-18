@@ -15,6 +15,10 @@ architecture sim of spi_controller_tb is
 
   constant sclk_hz : integer := 4e6; --4MHz
 
+  constant total_bits : integer := 16; --total bits tx by sensor chip
+  constant leading_z : integer := 3;
+  constant trailing_z : integer := 4;
+
   signal clk : std_logic := '1';
   signal rst : std_logic := '1';
 
@@ -31,10 +35,12 @@ begin
 
   clk <= not clk after clk_period / 2;
 
-  DUT : entity work.spi_controller(rtl)
+  DUT : entity work.spi_master(rtl)
   generic map (
     clk_hz => clk_hz,
-    --data_bits => -----
+    total_bits => total_bits, --total bits tx by sensor chip
+    leading_z => leading_z,
+    trailing_z => trailing_z,
     sclk_hz => sclk_hz
   )
   port map (
@@ -91,6 +97,7 @@ begin
     verify("11110000");
     verify("10101010");
     verify("00001111");
+    wait for clk_period * 100;
     print("Test: Completed");
 
     finish;

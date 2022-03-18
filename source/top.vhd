@@ -35,11 +35,20 @@ architecture rtl of top is
 begin
   
   --port map DUT/ instantiate components here -----------------------
-
-
-
-
-
+  
+  
+  
+  DUT : entity work.spi_master(rtl)
+  port map (
+      clk => clk,
+      rst => rst,
+      valid => valid,
+      cs => cs,
+      sclk => sclk,
+      miso => miso,
+      ready => ready,
+      data => data
+  );
 
 
    READY_FSM_PROC : process(clk)

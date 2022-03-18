@@ -4,11 +4,11 @@ use ieee.numeric_std.all;
 
 entity spi_master is
     generic (
-        clk_hz : integer := 100e6; --FPGA clock
-        total_bits : integer := 16; --total bits tx by sensor chip
-        leading_z : integer := 3;
-        trailing_z : integer := 4;
-        sclk_hz : integer := 4e6); --sensor’s frequency 
+        clk_hz : integer; -- := 100e6; --FPGA clock
+        total_bits : integer; -- := 16; --total bits tx by sensor chip
+        leading_z : integer; -- := 3;
+        trailing_z : integer; --  := 4;
+        sclk_hz : integer); -- := 4e6); --sensor’s frequency 
     port (
         --fpga system
         clk : in std_logic;
@@ -123,7 +123,7 @@ begin
                         sclk <= '1';
                         temp_sclk <= '1';
                         prev_sclk <= temp_sclk;
-
+                        cs <= '1';
                         if ready = '1' then
                             Master_State <= TRANSMISSION;
                         end if;
@@ -137,20 +137,20 @@ begin
                         -- the following if statement checks if data is ready to output!
                         if i = 0 then
                             data <= temp_data;
-                            i <= 0;
+                            i <= total_bits-leading_z-trailing_z-1;
                             valid <= '1';
                         else
                             valid <= '0';
                         end if;
 
                         if Rising_Edge_Check(prev_sclk, temp_sclk) = '1' then -- rising edge of B clk
-                            if sclk_counter < leading_z then
+                            if sclk_counter < leading_z+1 then
                                 sclk_counter <= sclk_counter + 1;
-                            else    
-                                temp_data(i-1) <= valid_miso;
-                                sclk_counter <= sclk_counter + 1;
-                                if sclk_counter < total_bits-trailing_z-1 then
+                            else
+                                if sclk_counter < total_bits-trailing_z then
+                                    temp_data(i-1) <= valid_miso;
                                     i <= i - 1;
+                                    sclk_counter <= sclk_counter + 1;
                                 else
                                     if sclk_counter < total_bits then
                                         sclk_counter <= sclk_counter + 1;
