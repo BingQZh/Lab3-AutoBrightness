@@ -23,7 +23,10 @@ architecture sim of top_tb is
   signal sclk : std_logic;
   signal miso : std_logic := '0';
   signal input_data : std_logic_vector(15 downto 0) := "0000101101110000";
-
+  constant fpga_clk : integer := 100e6;-- Integer representing the FPGA clock frequency
+  constant pwm_clk  : integer := 100000000;-- Ingeter representing the clock frequency for pwm ****USING HIGHER PWM_CLK FOR MODELSIM
+  constant pwm_res  : integer := 8;-- Integer of pwm resolution, 8 bits in this lab
+  constant testclk_period : time := 1 sec / fpga_clk;
 
 begin
 
@@ -42,12 +45,12 @@ begin
   CHECK_PROC : process
     begin
 
-        wait for clk_period * 200;
+        wait for sclk_period * 5592360;
         first_miso : for i in 0 to 15 loop
             miso <= input_data(i);
             wait for sclk_period * 1;
         end loop first_miso;
-        wait for clk_period * 10;
+        wait for sclk_period * 5692360;
 
         finish;
     end process;
