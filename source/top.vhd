@@ -91,6 +91,7 @@ begin
   )
   port map(
     clock => clock_out,
+    rst => debounced_rst,
     duty_cycle => data,
     pwm_count => pwm_count,
     pwm_out => pwm_out
