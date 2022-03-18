@@ -12,6 +12,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 use ieee.numeric_std.all;
 
 entity prescaler is
+    generic (
+        fpga_clk : integer; --:100e6
+        pwm_clk : integer; --:=4e6
+        pwm_res : integer --8
+    );
     port(
         clk     : IN std_logic;
         rst     : IN std_logic;
@@ -20,9 +25,9 @@ entity prescaler is
 end prescaler;
 
 architecture rtl of prescaler is
-    constant fpga_clk : integer := 100e6;-- Integer representing the FPGA clock frequency
-    constant pwm_clk  : integer := 100000000;-- Ingeter representing the clock frequency for pwm ****USING HIGHER PWM_CLK FOR MODELSIM
-    constant pwm_res  : integer := 8;-- Integer of pwm resolution, 8 bits in this lab
+    --constant fpga_clk : integer := 100e6;-- Integer representing the FPGA clock frequency
+    --constant pwm_clk  : integer := 100000000;-- Ingeter representing the clock frequency for pwm ****USING HIGHER PWM_CLK FOR MODELSIM
+    --constant pwm_res  : integer := 8;-- Integer of pwm resolution, 8 bits in this lab
 
     signal counter  : integer := 0;
     signal out_clock : std_logic := '0';

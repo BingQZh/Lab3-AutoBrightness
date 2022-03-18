@@ -7,6 +7,9 @@ entity top is
     clk_hz : integer := 100e6;
     sclk_hz : integer := 4e6;
     clk_counter_bits : integer := 24 --for ready_fsm to periodically generate ready signal for chip
+    total_bits : integer := 16; --total bits tx by sensor chip
+    leading_z : integer := 3;
+    trailing_z : integer := 4
   );
   port (
     clk : in std_logic;
@@ -21,9 +24,17 @@ end top;
 architecture rtl of top is
 
   -- SPI controller signals
-  
-  --pwm signals
+  signal ready : std_logic;
+  signal valid : std_logic;
+  signal data : std_logic_vector(total_bits-leading_z-trailing_z-2 downto 0));
 
+  --prescaler
+  signal clock_out : std_logic;
+
+  --pwm signals
+  signal pwm_res : integer := 8;
+  --signal fpga_clk : integer := 100e6;
+  --signal pwm_clk : integer := 4e6;
 
   --------------    READY FSM PROCESS SIGNALS   -------------------------
   -- This counter controls how often samples are fetched and sent
@@ -39,6 +50,13 @@ begin
   
   
   DUT : entity work.spi_master(rtl)
+  generic map(
+    clk_hz => clk_hz,
+    total_bits => total_bits,
+    leading_z => leading_z,
+    trailing_z => trailing_z
+    sclk_hz => sclk_hz
+  )
   port map (
       clk => clk,
       rst => rst,
@@ -50,6 +68,19 @@ begin
       data => data
   );
 
+  DUT: entity work.prescaler(rtl)
+  generic map(
+   -- clk_hz => fpga_clk,
+    --sclk_hz => pwm_clk,
+    fpga_clk => clk_hz,
+    pwm_clk => sclk_hz,
+    pwm_res => pwm_res
+  )
+  port map(
+    clk => clk,
+    rst => rst,
+    clock_out => clock_out
+  );
 
    READY_FSM_PROC : process(clk)
     begin
