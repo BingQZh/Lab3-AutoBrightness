@@ -6,7 +6,7 @@ entity top is
   generic (
     clk_hz : integer := 100e6;
     sclk_hz : integer := 4e6;
-    clk_counter_bits : integer := 24 --for ready_fsm to periodically generate ready signal for chip
+    clk_counter_bits : integer := 24; --for ready_fsm to periodically generate ready signal for chip
     total_bits : integer := 16; --total bits tx by sensor chip
     leading_z : integer := 3;
     trailing_z : integer := 4
@@ -24,9 +24,9 @@ end top;
 architecture rtl of top is
 
   -- SPI controller signals
-  signal ready : std_logic;
-  signal valid : std_logic;
-  signal data : std_logic_vector(total_bits-leading_z-trailing_z-2 downto 0));
+  signal ready : std_logic := '0';
+  signal valid : std_logic := '0';
+  signal data : std_logic_vector(total_bits-leading_z-trailing_z-2 downto 0);
 
   --prescaler
   signal clock_out : std_logic;
@@ -54,7 +54,7 @@ begin
     clk_hz => clk_hz,
     total_bits => total_bits,
     leading_z => leading_z,
-    trailing_z => trailing_z
+    trailing_z => trailing_z,
     sclk_hz => sclk_hz
   )
   port map (
@@ -68,7 +68,7 @@ begin
       data => data
   );
 
-  DUT: entity work.prescaler(rtl)
+  DUT2 : entity work.prescaler(rtl)
   generic map(
    -- clk_hz => fpga_clk,
     --sclk_hz => pwm_clk,

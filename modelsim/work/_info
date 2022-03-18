@@ -14,7 +14,7 @@ Z0 w1647563799
 Z1 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
 Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 12
+!i122 32
 Z4 dU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/modelsim
 Z5 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/prescaler.vhd
 Z6 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/prescaler.vhd
@@ -24,9 +24,9 @@ VTZB>5il:K:mf7C1GT8Oc?1
 !s100 W?lLLD34ND;3m1[29^1`[2
 Z7 OV;C;2020.1;71
 32
-Z8 !s110 1647565055
+Z8 !s110 1647565570
 !i10b 1
-Z9 !s108 1647565054.000000
+Z9 !s108 1647565569.000000
 Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/prescaler.vhd|
 Z11 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/prescaler.vhd|
 !i113 1
@@ -36,8 +36,8 @@ Artl
 R1
 R2
 R3
-DEx4 work 9 prescaler 0 22 TZB>5il:K:mf7C1GT8Oc?1
-!i122 12
+Z14 DEx4 work 9 prescaler 0 22 TZB>5il:K:mf7C1GT8Oc?1
+!i122 32
 l38
 L27 40
 V_kcienZ>mBann]j5bW6Z21
@@ -53,14 +53,14 @@ R11
 R12
 R13
 Epwm
-Z14 w1647563725
+Z15 w1647563725
 R1
 R2
 R3
-!i122 13
+!i122 33
 R4
-Z15 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd
-Z16 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd
+Z16 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd
+Z17 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd
 l0
 L15 1
 V9zBiM459T4_TeB^@LV8jZ1
@@ -69,9 +69,9 @@ R7
 32
 R8
 !i10b 1
-Z17 !s108 1647565055.000000
-Z18 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd|
-Z19 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd|
+Z18 !s108 1647565570.000000
+Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd|
+Z20 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd|
 !i113 1
 R12
 R13
@@ -80,7 +80,7 @@ R1
 R2
 R3
 DEx4 work 3 pwm 0 22 9zBiM459T4_TeB^@LV8jZ1
-!i122 13
+!i122 33
 l34
 L27 34
 Vg=4L_X?j>ankIJoBCL5Jf1
@@ -89,32 +89,32 @@ R7
 32
 R8
 !i10b 1
-R17
 R18
 R19
+R20
 !i113 1
 R12
 R13
 Espi_master
-Z20 w1647563634
+Z21 w1647563634
 R1
 R2
 R3
-!i122 14
+!i122 34
 R4
-Z21 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd
-Z22 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd
+Z22 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd
+Z23 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd
 l0
 L5 1
 VTjP<:fACmPDONjc5DN7Vi2
 !s100 d270g@F`5lH=?aPGXM8][3
 R7
 32
-Z23 !s110 1647565056
+Z24 !s110 1647565571
 !i10b 1
-Z24 !s108 1647565056.000000
-Z25 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd|
-Z26 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd|
+Z25 !s108 1647565571.000000
+Z26 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd|
+Z27 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd|
 !i113 1
 R12
 R13
@@ -122,42 +122,64 @@ Artl
 R1
 R2
 R3
-Z27 DEx4 work 10 spi_master 0 22 TjP<:fACmPDONjc5DN7Vi2
-!i122 14
+Z28 DEx4 work 10 spi_master 0 22 TjP<:fACmPDONjc5DN7Vi2
+!i122 34
 l68
-Z28 L30 142
-Z29 VR64Md?Ne;[36ATkDi@jY:2
-Z30 !s100 6]Bfai1z_P]ak4G@CQA7N3
+L30 142
+VR64Md?Ne;[36ATkDi@jY:2
+!s100 6]Bfai1z_P]ak4G@CQA7N3
 R7
 32
-R23
-!i10b 1
 R24
+!i10b 1
 R25
 R26
+R27
 !i113 1
 R12
 R13
 Etop
-w1647564466
+Z29 w1647565544
 R1
 R2
 R3
-!i122 11
+!i122 35
 R4
-8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd
-FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd
+Z30 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd
+Z31 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd
 l0
 L5 1
-VRWRc4gh<OV4bFHWD`Tlce0
-!s100 =UNHkA9H:cE:ledWJPz6T2
+VC`jzOQ7jc:^=PF]l9@P;O3
+!s100 ;HiQ=Z<c>7l`[C;h5z0F[1
 R7
 32
-!s110 1647564491
+Z32 !s110 1647565572
 !i10b 1
-Z31 !s108 1647564490.000000
-!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd|
+Z33 !s108 1647565572.000000
+Z34 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd|
 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd|
+!i113 1
+R12
+R13
+Artl
+R14
+R28
+R1
+R2
+R3
+DEx4 work 3 top 0 22 C`jzOQ7jc:^=PF]l9@P;O3
+!i122 35
+l46
+L24 101
+V:UeU:?dSihHLRWSl]`VNC1
+!s100 7oJGmlnD44_iC[ldJ:dYN2
+R7
+32
+R32
+!i10b 1
+R33
+R34
+Z35 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd|
 !i113 1
 R12
 R13
