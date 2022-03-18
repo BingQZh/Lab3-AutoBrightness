@@ -40,10 +40,10 @@ begin
     PRESCALER_PROC : process(clk)
     begin
         if rising_edge(clk) then
-            if rst = '1' then
-                counter <= 0;
-                out_clock <= '0';
-            else
+            --if rst = '1' then
+                -- counter <= 0;
+                -- out_clock <= '0';
+            --else
                 -- Increment clock clounter at every FPGA clock
                 -- Reset clock counter when maximum counter reached,
                 -- invert the resulted clock when half counter reched.
@@ -57,7 +57,7 @@ begin
                 else
                     out_clock <= '1';
                 end if;
-            end if;
+            --end if;
         end if;
     end process;
 
