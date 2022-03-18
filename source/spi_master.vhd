@@ -35,7 +35,7 @@ architecture rtl of spi_master is
     type STATES is (IDLE, TRANSMISSION); -- FSM states
     signal Master_State : STATES := IDLE;
 
-    signal temp_data : std_logic_vector(total_bits-leading_z-trailing_z-2 downto 0);
+    signal temp_data : std_logic_vector(total_bits-leading_z-trailing_z-2 downto 0) := (others => '0');
     signal i : integer range 0 to total_bits-leading_z-trailing_z-1 := total_bits-leading_z-trailing_z-1;
 
     signal sclk_counter : integer range 0 to total_bits := 0;
@@ -85,36 +85,20 @@ begin
         end if;
     end process;
 
-    -- SYNCHRONIZER_COMPARISON: process(clk)
-    -- begin
-    --     if rising_edge(clk) then
-    --         if rst = '1' then
-    --             validSDin <= '0';
-    --             validBCLK <= '0';
-    --             validLRCLK <= '0';
-    --         else
-
-    --             -- if BCLK_q2d_1 = BCLK_q2d_2 and BCLK_q2d_1 = BCLK_q2d_3 then
-    --                 validBCLK <= BCLK_q2d_3;
-    --             -- end if;
-
-    --             -- if LRCLK_q2d_1 = LRCLK_q2d_2 and LRCLK_q2d_1 = LRCLK_q2d_3 then
-    --                 validLRCLK <= LRCLK_q2d_3;
-    --             -- end if;
-
-    --             -- if SDin_q2d_1 = SDin_q2d_2 and SDin_q2d_1 = SDin_q2d_3 then
-    --                 validSDin <= SDin_q2d_3;
-    --             -- end if;
-
-    --         end if;
-    --     end if;
-    -- end process;
-
     MASTER_PROC: process(clk)
     begin
         if rising_edge(clk) then
             if rst = '1' then
                 Master_State <= IDLE;
+                data <= (others => '0');
+                sclk <= '0';
+                temp_sclk <= '0';
+                prev_sclk <= '0';
+                cs <= '1';
+                temp_data <= (others => '0');
+                i <= total_bits-leading_z-trailing_z-1;
+                valid <= '0';
+                sclk_counter <= 0;
             else
             
                 case Master_State is
