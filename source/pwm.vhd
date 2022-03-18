@@ -3,7 +3,7 @@
 -- Group #: 9 
 -- Engineer: Valeriya Svichkar and Bing Qiu Zhang
 
--- Module Name: pwm - Behavioral
+-- Module Name: pwm - rtl
 -- Project Name: Lab3
 ----------------------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ architecture rtl of pwm is
     -- clk_counter holds the value of clock cycles passed in the current duty_cycle
     signal clk_counter: integer range 0 to (2**pwm_res)-1 := 0;
     signal pwm: std_logic := '0';
-    signal pwm_counter: integer := 0;
+    signal pwm_counter: integer range 0 to (2**pwm_res)-1 := 0;
     constant cycle_max: integer := (2**pwm_res)-1; --255 periods in a complete cycle if 8 bit resolution
 begin
    

@@ -1,3 +1,12 @@
+----------------------------------------------------------------------------------
+-- Course: ENSC462
+-- Group #: 9 
+-- Engineer: Valeriya Svichkar and Bing Qiu Zhang
+
+-- Module Name: spi_master - rtl
+-- Project Name: Lab3
+----------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -41,23 +50,11 @@ architecture rtl of spi_master is
     signal sclk_counter : integer range 0 to total_bits := 0;
     signal prev_sclk, temp_sclk : std_logic;
 
-    -- function Rising_Edge_Check(FF2 : std_logic;
-    --         FF3 : std_logic) return std_logic is
-    --     variable result : std_logic;
-    -- begin
-    --     if FF3 = '0' and FF2 = '1' then -- this is a rising edge
-    --         result := '1';
-    --     else
-    --         result := '0';
-    --     end if;
-    --     return result;
-    -- end function;
-
     function Rising_Edge_Check(FF2 : std_logic;
             FF3 : std_logic) return std_logic is
         variable result : std_logic;
     begin
-        if FF3 = '1' and FF2 = '0' then -- this is a falling edge
+        if FF3 = '1' and FF2 = '0' then
             result := '1';
         else
             result := '0';
@@ -104,6 +101,10 @@ begin
                 case Master_State is
 
                     when IDLE =>
+                        -- IDLE when ready is 0
+                        -- in IDLE set:
+                        --      sclk to high
+                        --      cs to high
                         sclk <= '1';
                         temp_sclk <= '1';
                         prev_sclk <= temp_sclk;
@@ -113,9 +114,14 @@ begin
                         end if;
 
                     when TRANSMISSION =>
+                        -- TRANSMISSION when ready pulsed
+
+                        -- Generate sclk:
                         prev_sclk <= temp_sclk;
                         sclk <= not temp_sclk after sclk_period / 2;
                         temp_sclk <= not temp_sclk after sclk_period / 2;
+
+                        -- set cs to low:
                         cs <= '0';
 
                         -- the following if statement checks if data is ready to output!
@@ -127,18 +133,23 @@ begin
                             valid <= '0';
                         end if;
 
-                        if Rising_Edge_Check(prev_sclk, temp_sclk) = '1' then -- rising edge of B clk
+                        -- read inputs when sclk rising edge
+                        if Rising_Edge_Check(prev_sclk, temp_sclk) = '1' then -- rising edge of sclk
+                            -- wait for leading zeros:
                             if sclk_counter < leading_z+1 then
                                 sclk_counter <= sclk_counter + 1;
                             else
+                                -- read data before trailing zeros
                                 if sclk_counter < total_bits-trailing_z then
                                     temp_data(i-1) <= valid_miso;
                                     i <= i - 1;
                                     sclk_counter <= sclk_counter + 1;
                                 else
+                                    -- wait for trailing zeros
                                     if sclk_counter < total_bits then
                                         sclk_counter <= sclk_counter + 1;
                                     else
+                                        -- all bits are read and return to idle!
                                         sclk_counter <= 0;
                                         sclk <= '1';
                                         Master_State <= IDLE;

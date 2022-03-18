@@ -1,3 +1,11 @@
+----------------------------------------------------------------------------------
+-- Course: ENSC462
+-- Group #: 9 
+-- Engineer: Valeriya Svichkar and Bing Qiu Zhang
+
+-- Module Name: top - rtl
+-- Project Name: Lab3
+----------------------------------------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -11,7 +19,6 @@ entity top is
     total_bits : integer := 16; --total bits tx by sensor chip
     leading_z : integer := 3;
     trailing_z : integer := 4
-    
   );
   port (
     clk : in std_logic;

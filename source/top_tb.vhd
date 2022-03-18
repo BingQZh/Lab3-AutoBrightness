@@ -1,3 +1,12 @@
+----------------------------------------------------------------------------------
+-- Course: ENSC462
+-- Group #: 9 
+-- Engineer: Valeriya Svichkar and Bing Qiu Zhang
+
+-- Module Name: top_tb - sim
+-- Project Name: Lab3
+----------------------------------------------------------------------------------
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

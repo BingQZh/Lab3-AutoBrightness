@@ -1,3 +1,7 @@
+# Group #: 9 
+# Engineer: Valeriya Svichkar and Bing Qiu Zhang
+# Lab3 constraint file
+
 create_clock -period 10.000 -name clock -waveform {0.000 5.000} [get_ports clk]
 set_property IOSTANDARD LVCMOS33 [get_ports clk]
 set_property IOSTANDARD LVCMOS33 [get_ports led_out]
