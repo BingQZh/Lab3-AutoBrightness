@@ -61,3 +61,9 @@
 # Compile of spi_master.vhd was successful.
 # Compile of top.vhd was successful.
 # 5 compiles, 0 failed with no errors.
+# Compile of reset_sync.vhd was successful.
+# Compile of prescaler.vhd was successful.
+# Compile of pwm.vhd was successful.
+# Compile of spi_master.vhd was successful.
+# Compile of top.vhd was successful.
+# 5 compiles, 0 failed with no errors.

@@ -106,7 +106,7 @@ begin
    READY_FSM_PROC : process(clk)
     begin
       if rising_edge(clk) then
-        if rst = '1' then
+        if debounced_rst = '1' then
           clk_counter <= (others => '0');
           state <= WAITING;
           ready <= '0';
