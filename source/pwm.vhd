@@ -30,12 +30,15 @@ architecture rtl of pwm is
     signal pwm: std_logic := '0';
     signal pwm_counter: integer := 0;
     constant cycle_max: integer := (2**pwm_res)-1; --255 periods in a complete cycle if 8 bit resolution
-    
+    signal prev_duty_cycle : std_logic_vector(pwm_res-1 downto 0) := (others => '0');
+
+    constant null_duty_cycle : std_logic_vector(pwm_res-1 downto 0) := (others => 'U');
 begin
    
     PRESCALER_PROC : process(clock)
     begin
         if rising_edge(clock) then
+
         
             -- output pwm_out ='1' when clock_counter is smaller than duty_cycle
 			if clk_counter < to_integer(unsigned(duty_cycle)) then
@@ -50,6 +53,13 @@ begin
 			if clk_counter = cycle_max-1 then --reset clock counter
 				clk_counter <= 0;
 			end if;
+
+            if (prev_duty_cycle /= duty_cycle) or (duty_cycle = null_duty_cycle) then
+                clk_counter <= 0;
+                prev_duty_cycle <= duty_cycle;
+                pwm <= '0';
+            end if;
+
         end if;
 
         pwm_count <= clk_counter ;
