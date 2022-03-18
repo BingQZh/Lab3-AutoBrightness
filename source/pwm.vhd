@@ -24,7 +24,7 @@ entity pwm is
     );
 end pwm;
 
-architecture Behavioral of pwm is
+architecture rtl of pwm is
     -- clk_counter holds the value of clock cycles passed in the current duty_cycle
     signal clk_counter: integer range 0 to (2**pwm_res)-1 := 0;
     signal pwm: std_logic := '0';
@@ -57,4 +57,4 @@ begin
 
     end process;
 
-end Behavioral;
+end rtl;
