@@ -1,0 +1,228 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/20.1
+Eprescaler
+Z0 w1647563799
+Z1 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 51
+Z4 dU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/modelsim
+Z5 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/prescaler.vhd
+Z6 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/prescaler.vhd
+l0
+L14 1
+VTZB>5il:K:mf7C1GT8Oc?1
+!s100 W?lLLD34ND;3m1[29^1`[2
+Z7 OV;C;2020.1;71
+32
+Z8 !s110 1647567275
+!i10b 1
+Z9 !s108 1647567274.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/prescaler.vhd|
+Z11 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/prescaler.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Artl
+R1
+R2
+R3
+Z14 DEx4 work 9 prescaler 0 22 TZB>5il:K:mf7C1GT8Oc?1
+!i122 51
+l38
+L27 40
+V_kcienZ>mBann]j5bW6Z21
+!s100 M[=Cn>T`AU@I[zBi8I?g[2
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Epwm
+Z15 w1647566080
+R1
+R2
+R3
+!i122 52
+R4
+Z16 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd
+Z17 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd
+l0
+L15 1
+V9zBiM459T4_TeB^@LV8jZ1
+!s100 @@0g9jMCiP4dW4NNcfmWS2
+R7
+32
+Z18 !s110 1647567276
+!i10b 1
+Z19 !s108 1647567275.000000
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd|
+Z21 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/pwm.vhd|
+!i113 1
+R12
+R13
+Abehavioral
+R1
+R2
+R3
+Z22 DEx4 work 3 pwm 0 22 9zBiM459T4_TeB^@LV8jZ1
+!i122 52
+l34
+L27 34
+Vg=4L_X?j>ankIJoBCL5Jf1
+!s100 ^J:n3S2`hc7Q^FMjPalGn2
+R7
+32
+R18
+!i10b 1
+R19
+R20
+R21
+!i113 1
+R12
+R13
+Ereset_sync
+Z23 w1647563618
+R2
+R3
+!i122 50
+R4
+Z24 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/reset_sync.vhd
+Z25 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/reset_sync.vhd
+l0
+L4 1
+V_S4@iPz<z5o?89;OLF;3E0
+!s100 ^_ee:;GTHE2=OmFTai3]_1
+R7
+32
+Z26 !s110 1647567274
+!i10b 1
+Z27 !s108 1647567273.000000
+Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/reset_sync.vhd|
+Z29 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/reset_sync.vhd|
+!i113 1
+R12
+R13
+Artl
+R2
+R3
+Z30 DEx4 work 10 reset_sync 0 22 _S4@iPz<z5o?89;OLF;3E0
+!i122 50
+l35
+L22 48
+VYh]=5X>AP0WaOLO46=Y2:2
+!s100 QYMzN5jgMOR3;A8z[9Ci42
+R7
+32
+R26
+!i10b 1
+R27
+R28
+R29
+!i113 1
+R12
+R13
+Espi_master
+Z31 w1647563634
+R1
+R2
+R3
+!i122 53
+R4
+Z32 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd
+Z33 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd
+l0
+L5 1
+VTjP<:fACmPDONjc5DN7Vi2
+!s100 d270g@F`5lH=?aPGXM8][3
+R7
+32
+R18
+!i10b 1
+Z34 !s108 1647567276.000000
+Z35 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd|
+Z36 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/spi_master.vhd|
+!i113 1
+R12
+R13
+Artl
+R1
+R2
+R3
+Z37 DEx4 work 10 spi_master 0 22 TjP<:fACmPDONjc5DN7Vi2
+!i122 53
+l68
+L30 142
+VR64Md?Ne;[36ATkDi@jY:2
+!s100 6]Bfai1z_P]ak4G@CQA7N3
+R7
+32
+R18
+!i10b 1
+R34
+R35
+R36
+!i113 1
+R12
+R13
+Etop
+Z38 w1647567247
+R1
+R2
+R3
+!i122 54
+R4
+Z39 8U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd
+Z40 FU:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd
+l0
+L5 1
+VlBHi[Ec<c3>468>D_:3;82
+!s100 UnaXR9:<CQN0gWa;mhOE^0
+R7
+32
+Z41 !s110 1647567277
+!i10b 1
+R34
+Z42 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd|
+Z43 !s107 U:/ENSC462/LAB3/github/ENSC462Lab3-AutoBrightness/source/top.vhd|
+!i113 1
+R12
+R13
+Artl
+R30
+R22
+R14
+R37
+R1
+R2
+R3
+Z44 DEx4 work 3 top 0 22 lBHi[Ec<c3>468>D_:3;82
+!i122 54
+l51
+Z45 L26 122
+VD3<zB:<ef?R]kTYZfIUSF2
+!s100 m[_S>7o9=HS<T?6P5i0Oi0
+R7
+32
+R41
+!i10b 1
+R34
+R42
+R43
+!i113 1
+R12
+R13

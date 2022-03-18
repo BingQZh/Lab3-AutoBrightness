@@ -1,12 +1,24 @@
+----------------------------------------------------------------------------------
+-- Course: ENSC462
+-- Group #: 9 
+-- Engineer: Valeriya Svichkar and Bing Qiu Zhang
+
+-- Module Name: top - rtl
+-- Project Name: Lab3
+----------------------------------------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity top is
   generic (
+    pwm_res : integer := 8;
     clk_hz : integer := 100e6;
     sclk_hz : integer := 4e6;
-    clk_counter_bits : integer := 24 --for ready_fsm to periodically generate ready signal for chip
+    clk_counter_bits : integer := 24; --for ready_fsm to periodically generate ready signal for chip
+    total_bits : integer := 16; --total bits tx by sensor chip
+    leading_z : integer := 3;
+    trailing_z : integer := 4
   );
   port (
     clk : in std_logic;
@@ -21,9 +33,19 @@ end top;
 architecture rtl of top is
 
   -- SPI controller signals
-  
-  --pwm signals
+  signal ready : std_logic := '0';
+  signal valid : std_logic := '0';
+  signal data : std_logic_vector(total_bits-leading_z-trailing_z-2 downto 0);
 
+  --prescaler
+  signal clock_out : std_logic;
+
+  --pwm signals
+  signal pwm_count : integer range 0 to (2**pwm_res)-1;
+  signal pwm_out : std_logic := '0';
+
+  --debouned reset
+  signal debounced_rst : std_logic := '0';
 
   --------------    READY FSM PROCESS SIGNALS   -------------------------
   -- This counter controls how often samples are fetched and sent
@@ -35,17 +57,61 @@ architecture rtl of top is
 begin
   
   --port map DUT/ instantiate components here -----------------------
+  
+  SPI : entity work.spi_master(rtl)
+  generic map(
+    clk_hz => clk_hz,
+    total_bits => total_bits,
+    leading_z => leading_z,
+    trailing_z => trailing_z,
+    sclk_hz => sclk_hz
+  )
+  port map (
+      clk => clk,
+      rst => debounced_rst,
+      valid => valid,
+      cs => cs,
+      sclk => sclk,
+      miso => miso,
+      ready => ready,
+      data => data
+  );
 
+  PRESCALER : entity work.prescaler(rtl)
+  generic map(
+    fpga_clk => clk_hz,
+    pwm_clk => sclk_hz,
+    pwm_res => pwm_res
+  )
+  port map(
+    clk => clk,
+    rst => debounced_rst,
+    clock_out => clock_out
+  );
 
+  PWM : entity work.pwm(rtl)
+  generic map(
+    pwm_res => pwm_res
+  )
+  port map(
+    clock => clock_out,
+    rst => debounced_rst,
+    duty_cycle => data,
+    pwm_count => pwm_count,
+    pwm_out => pwm_out
+  );
 
-
-
-
+  RESET_SYNC : entity work.reset_sync(rtl)
+  port map(
+    clk => clk,
+    rst_in => rst,
+    rst_out => debounced_rst
+  );
 
    READY_FSM_PROC : process(clk)
     begin
       if rising_edge(clk) then
-        if rst = '1' then
+        if debounced_rst = '1' then
           clk_counter <= (others => '0');
           state <= WAITING;
           ready <= '0';
@@ -80,5 +146,7 @@ begin
         end if;
       end if;
     end process;
+
+    led_out <= (others => pwm_out);
 
 end architecture;
