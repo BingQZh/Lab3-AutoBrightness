@@ -4,12 +4,14 @@ use ieee.numeric_std.all;
 
 entity top is
   generic (
+    pwm_res : integer := 8;
     clk_hz : integer := 100e6;
     sclk_hz : integer := 4e6;
     clk_counter_bits : integer := 24; --for ready_fsm to periodically generate ready signal for chip
     total_bits : integer := 16; --total bits tx by sensor chip
     leading_z : integer := 3;
     trailing_z : integer := 4
+    
   );
   port (
     clk : in std_logic;
@@ -32,7 +34,6 @@ architecture rtl of top is
   signal clock_out : std_logic;
 
   --pwm signals
-  signal pwm_res : integer := 8;
   signal pwm_count : integer range 0 to (2**pwm_res)-1;
   signal pwm_out : std_logic := '0';
   --signal fpga_clk : integer := 100e6;
@@ -75,7 +76,7 @@ begin
    -- clk_hz => fpga_clk,
     --sclk_hz => pwm_clk,
     fpga_clk => clk_hz,
-    clk => sclk_hz,
+    pwm_clk => sclk_hz,
     pwm_res => pwm_res
   )
   port map(
@@ -94,7 +95,6 @@ begin
     pwm_count => pwm_count,
     pwm_out => pwm_out
   );
-
 
   DUT4 : entity work.reset_sync(rtl)
   port map(

@@ -44,3 +44,20 @@
 # Compile of spi_master.vhd was successful.
 # Compile of top.vhd was successful with warnings.
 # 4 compiles, 0 failed with no errors.
+# Compile of prescaler.vhd was successful.
+# Compile of pwm.vhd was successful.
+# Compile of spi_master.vhd was successful.
+# Compile of top.vhd failed with 5 errors.
+# 4 compiles, 1 failed with 5 errors.
+# Compile of prescaler.vhd was successful.
+# Compile of pwm.vhd was successful.
+# Compile of spi_master.vhd was successful.
+# Compile of top.vhd failed with 3 errors.
+# 4 compiles, 1 failed with 3 errors.
+# Compile of top.vhd failed with 3 errors.
+# Compile of reset_sync.vhd was successful.
+# Compile of prescaler.vhd was successful.
+# Compile of pwm.vhd was successful.
+# Compile of spi_master.vhd was successful.
+# Compile of top.vhd was successful.
+# 5 compiles, 0 failed with no errors.
